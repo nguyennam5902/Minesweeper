@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Visual_Studio_Code\\Java\\OOP_20221\\javafx-0.2-sources.jar",
+        "postgresql-42.3.5.jar"
+    ],
+    "java.format.settings.url": "eclipse-formatter.xml"
+}
