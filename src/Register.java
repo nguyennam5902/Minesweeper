@@ -29,23 +29,23 @@ public class Register extends JFrame {
          else {
             try {
                Class.forName("org.postgresql.Driver");
-               final ResultSet rs = GameAction.executeQuery(Minesweeper.statement,
+               final ResultSet rs = QueryHandler.executeQuery(
                      "SELECT * FROM accounts WHERE user_id=?",
                      usernameRight.getText());
                if (rs.next())
                   JOptionPane.showMessageDialog(null, "Username existed! Please choose another username");
                else {
-                  GameAction.executeUpdate(Minesweeper.statement, "insert into accounts values(?,?);",
+                  QueryHandler.executeUpdate("insert into accounts values(?,?);",
                         usernameRight.getText(), GameAction.hashPassword(upPassword));
-                  GameAction.executeUpdate(Minesweeper.statement,
+                  QueryHandler.executeUpdate(
                         "insert into beginner_db values(?,ARRAY[]::double precision[],0,0,0);",
                         usernameRight.getText());
-                  GameAction.executeUpdate(Minesweeper.statement,
+                  QueryHandler.executeUpdate(
                         "insert into intermediate_db values(?,ARRAY[]::double precision[],0,0,0);",
                         usernameRight.getText());
-                  GameAction.executeUpdate(Minesweeper.statement,
+                  QueryHandler.executeUpdate(
                         "insert into expert_db values(?,ARRAY[]::double precision[],0,0,0);", usernameRight.getText());
-                  GameAction.executeUpdate(Minesweeper.statement, "insert into custom_db values(?,0,'','');",
+                  QueryHandler.executeUpdate("insert into custom_db values(?,0,'','');",
                         usernameRight.getText());
                   JOptionPane.showMessageDialog(null, "Register succeed");
                   dispose();
@@ -60,10 +60,11 @@ public class Register extends JFrame {
          dispose();
          SwingUtilities.invokeLater(() -> new Login());
       });
-      GameAction.setupManyComponent(true, f, usernameLeft, passwordLeft, confirmPasswordLeft, registerButton,
+      SetupController.setupManyComponent(true, f, usernameLeft, passwordLeft, confirmPasswordLeft, registerButton,
             loginButton);
-      GameAction.addManyComponent(cp, usernameLeft, usernameRight, passwordLeft, passwordRight, confirmPasswordLeft,
+      SetupController.addManyComponent(cp, usernameLeft, usernameRight, passwordLeft, passwordRight,
+            confirmPasswordLeft,
             confirmPasswordRight, registerButton, loginButton);
-      GameAction.setupFrame(this, "Register", new Dimension(600, 400));
+      SetupController.setupFrame(this, "Register", new Dimension(600, 400));
    }
 }
